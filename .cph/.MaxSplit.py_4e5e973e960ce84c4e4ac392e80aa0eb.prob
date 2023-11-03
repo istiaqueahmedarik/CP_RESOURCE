@@ -1,0 +1,1 @@
+{"name":"Local: MaxSplit","url":"d:\\coding\\NEW_CP\\MaxSplit.py","tests":[{"id":1698332271535,"input":"LLLRRR","output":""},{"id":1698378772474,"input":"LLRRLLLRRR","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\coding\\NEW_CP\\MaxSplit.py","group":"local","local":true}

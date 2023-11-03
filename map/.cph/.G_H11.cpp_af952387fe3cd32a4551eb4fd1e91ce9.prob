@@ -1,0 +1,1 @@
+{"name":"Local: G_H11","url":"d:\\coding\\NEW_CP\\map\\G_H11.cpp","tests":[{"id":1681221915421,"input":"4\n7\n4 1 4 6 7 7 5\n2\n2 1\n1\n1\n3\n2 2 2","output":"6\n1\n0\n3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\coding\\NEW_CP\\map\\G_H11.cpp","group":"local","local":true}

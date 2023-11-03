@@ -1,0 +1,1 @@
+{"name":"Local: houseRobber","url":"d:\\coding\\NEW_CP\\assignment\\houseRobber.cpp","tests":[{"id":1683357890722,"input":"3\n2 3 2","output":""},{"id":1683357977273,"input":"4\n1 2 3 1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\coding\\NEW_CP\\assignment\\houseRobber.cpp","group":"local","local":true}

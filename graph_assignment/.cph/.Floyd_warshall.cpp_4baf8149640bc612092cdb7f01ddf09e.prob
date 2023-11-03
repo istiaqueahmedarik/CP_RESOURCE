@@ -1,0 +1,1 @@
+{"name":"Local: Floyd_warshall","url":"d:\\coding\\NEW_CP\\graph_assignment\\Floyd_warshall.cpp","tests":[{"id":1681574921717,"input":"5 5 6\n1 2 5\n1 3 9\n2 3 3\n1 4 7\n3 4 4\n1 2\n2 1\n1 3\n1 4\n3 2\n1 5\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\coding\\NEW_CP\\graph_assignment\\Floyd_warshall.cpp","group":"local","local":true}

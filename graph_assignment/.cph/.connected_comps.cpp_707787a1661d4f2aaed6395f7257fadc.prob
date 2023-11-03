@@ -1,0 +1,1 @@
+{"name":"Local: connected_comps","url":"d:\\coding\\NEW_CP\\graph_assignment\\connected_comps.cpp","tests":[{"id":1681575738876,"input":"5 8\n########\n#..#...#\n#.##.#.#\n.#.#...#\n#.######","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\coding\\NEW_CP\\graph_assignment\\connected_comps.cpp","group":"local","local":true}

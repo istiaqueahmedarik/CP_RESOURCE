@@ -1,59 +1,24 @@
 #include <bits/stdc++.h>
+#define int long long
+#define float double
+#define endl '\n'
+#define IOS                  \
+    ios::sync_with_stdio(0); \
+    cin.tie(0);              \
+    cout.tie(0);
+
 using namespace std;
-
-namespace Financial
+int32_t main()
 {
-    namespace Mortgage
+    IOS;
+    priority_queue<int> pq;
+    pq.push(1);
+    pq.push(2);
+    pq.push(3);
+    while (!pq.empty())
     {
-        float MonthlyPayment(int p, float r, int n)
-        {
-            float c;
-            r /= 12.0;
-            c = pow(1.0 + r, n) - 1.0;
-            return (p * r) / c;
-        }
-        float TotalPayments(int p, float r, int n)
-        {
-            return MonthlyPayment(p, r, n) * n;
-        }
+        cout << pq.top() << endl;
+        pq.pop();
     }
-    namespace Retirement
-    {
-        float MonthlySavings(int p, float r, int n)
-        {
-            float c;
-            r /= 12.0;
-            c = pow(1.0 + r, n) - 1.0;
-            return p / ((pow(1.0 + r, n) - 1.0) / r) * c;
-        }
-        float TotalSavings(int p, float r, int n)
-        {
-            return MonthlySavings(p, r, n) * n * 12.0;
-        }
-    }
-}
-
-namespace Finan = Financial::Mortgage;
-namespace Retir = Financial::Retirement;
-
-int main()
-{
-    long long p, n;
-
-    float r;
-
-    cout << "Enter Principal Amount: ";
-    cin >> p;
-
-    cout << "Enter Interest Rate: ";
-    cin >> r;
-
-    cout << "Enter Number of Periods: ";
-    cin >> n;
-
-    //        cout<<Finan::MonthlyPayment(p,r,n);
-
-    cout << "Total Mortgage Payment: " << Finan::TotalPayments(p, r, n) << endl;
-
-    cout << "Total Retirement Savings: " << Retir::TotalSavings(p, r, n) << endl;
+    return 0;
 }

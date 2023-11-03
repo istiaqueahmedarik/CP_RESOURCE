@@ -1,0 +1,1 @@
+{"name":"Local: scc","url":"d:\\coding\\NEW_CP\\scc.cpp","tests":[{"id":1692371284934,"input":"5 4\n2 1 \n1 3\n3 1\n4 5","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\coding\\NEW_CP\\scc.cpp","group":"local","local":true}

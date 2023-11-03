@@ -1,0 +1,1 @@
+{"name":"Local: A","url":"d:\\coding\\NEW_CP\\map\\queue\\A.cpp","tests":[{"id":1681228554883,"input":"2\n6\nA 10\nA 5\nQ\nA 100\nR\nQ\n6\nA 5\nQ\nR\nQ\nR\nR","output":"Case 1:\n10\n10\nCase 2:\n5\nEmpty"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\coding\\NEW_CP\\map\\queue\\A.cpp","group":"local","local":true}
