@@ -94,16 +94,27 @@ void _print(T t, V... v)
 
 inline void solve()
 {
-    int a, b;
-    cin >> a >> b;
-    cout << (b / 3 - (a + 2) / 3 + 1) << endl;
+    string s;
+    cin >> s;
+    map<char, int> mp;
+    for (auto &i : s)
+        mp[i]++;
+    int ans = LLONG_MAX;
+    string t = "Bulbasr";
+    for (auto &i : t)
+    {
+        if (i == 'a' || i == 'u')
+            ans = min(ans, mp[i] / 2);
+        else
+            ans = min(ans, mp[i]);
+    }
+    cout << ans << endl;
 }
 
 auto main() -> int32_t
 {
     IOS;
-    int t, cs = 1;
-    cin >> t;
+    int t = 1, cs = 1;
     while (t--)
     {
         solve();

@@ -92,18 +92,29 @@ void _print(T t, V... v)
 // template <typename T>
 // using o_multiset_g = tree<T, null_type, greater_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-inline void solve()
+void solve()
 {
-    int l, r;
-    cin >> l >> r;
-    cout << (int)1e9 + 7 << endl;
+    int N;
+    cin >> N;
+    for (int h = 1; h <= 3505; h++)
+    {
+        for (int n = 1; n <= 3505; n++)
+        {
+            int a = 4 * h * n - N * n - N * h;
+            int b = N * h * n;
+            if (a > 0 && b % a == 0)
+            {
+                cout << h << " " << n << " " << b / a << endl;
+                return;
+            }
+        }
+    }
 }
 
 auto main() -> int32_t
 {
     IOS;
-    int t, cs = 1;
-    cin >> t;
+    int t = 1, cs = 1;
     while (t--)
     {
         solve();

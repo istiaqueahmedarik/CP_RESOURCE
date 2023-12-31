@@ -1,0 +1,1 @@
+{"name":"Local: possible","url":"d:\\coding\\NEW_CP\\possible.cpp","tests":[{"id":1702393324654,"input":"3\n2 50 27\n5 40 38\n100 100 0\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\coding\\NEW_CP\\possible.cpp","group":"local","local":true}

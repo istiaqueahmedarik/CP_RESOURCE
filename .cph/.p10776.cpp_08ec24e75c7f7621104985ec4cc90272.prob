@@ -1,0 +1,1 @@
+{"name":"Local: p10776","url":"d:\\coding\\NEW_CP\\p10776.cpp","tests":[{"id":1701626362625,"input":"ab 1","output":""},{"id":1701626662073,"input":"abcde 2\nabcd 3\naba 2","output":"ab\nac\nad\nae\nbc\nbd\nbe\ncd\nce\nde\nabc\nabd\nacd\nbcd\naa\nab"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\coding\\NEW_CP\\p10776.cpp","group":"local","local":true}

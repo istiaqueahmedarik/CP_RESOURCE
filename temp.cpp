@@ -1,107 +1,80 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-const int MOD = 1e9 + 7;
-int solve2(int n)
+
+// Structure for iterative node for Branch and Bound
+struct Node {
+    int weight;
+    int profit;
+    int level;
+    int bound;
+};
+
+Node* newNode(int weight, int profit, int level)
 {
-    if (n >= 2 && n <= 9)
-    {
-        return 1;
-    }
-    else if (n >= 10 && n <= 81)
-    {
-        return 0;
-    }
-    else if (n >= 82 && n <= 729)
-    {
-        return 1;
-    }
-    else if (n >= 730 && n <= 6561)
-    {
-        return 0;
-    }
-    else if (n >= 6562 && n <= 59049)
-    {
-        return 1;
-    }
-    else if (n >= 59050 && n <= 531441)
-    {
-        return 0;
-    }
-    else if (n >= 531442 && n <= 4782969)
-    {
-        return 1;
-    }
-    else if (n >= 4782970 && n <= 43046721)
-    {
-        return 0;
-    }
-    else if (n >= 43046722 && n <= 387420489)
-    {
-        return 1;
-    }
-    else if (n >= 387420490 && n <= 3486784401)
-    {
-        return 0;
-    }
-    else
-    {
-        return 1;
-    }
+    Node* node = new Node;
+    node->weight= weight;
+    node->profit = profit;
+    node->level= level;
+    return node;
 }
 
-int qp(int a, int b)
+// Returns upper bound for profit in subtree profit at node node and profit
+int bound(Node* node, int weight, int profit[], int weightList[], int n)
 {
-    int x = 1;
-    a %= MOD;
-    while (b)
+    if (node->weight >= weight)
+        return 0;
+    int profit_bound = node->profit;
+    int availableWeight = weight - node->weight;
+    int i = node->level + 1;
+
+    while ((i<n) && (availableWeight >= weightList[i]))
     {
-        if (b & 1)
-            x = x * a % MOD;
-        a = a * a % MOD;
-        b >>= 1;
+        availableWeight -= weightList[i];
+        profit_bound += profit[i];
+        i++;
     }
-    return x;
-}
-int solve1(int n)
-{
-    int nines = 0, twoes = 0;
-    int st = 0;
-    int prev = 0;
-    int cur = 0;
-    for (;;)
-    {
-        int sz = qp(9, nines) * qp(2, twoes);
-        if (sz >= n && n >= prev)
-        {
-            if (st)
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
-            break;
-        }
-        st ^= 1;
-        prev = sz;
-        if (nines == twoes)
-            nines++;
-        else
-            twoes++;
-    }
+
+    // Check if next item can fit into the available weight
+    if (i < n)
+        profit_bound += (profit[i] * availableWeight) / weightList[i];
+
+    return profit_bound;
 }
 
-auto main() -> int32_t
+int knapSack(int weight, int profit[], int weightList[], int n)
 {
-    // IOS;
-    for (int i = 1; i <= 100; i++)
-    {
-        if (solve1(i) != solve2(i))
-        {
-            cout << i << endl;
+    queue<Node*> Q;
+    Node* node = newNode(0, 0, -1);
+    Q.push(node);
+
+    int maxProfit = 0;
+    while (!Q.empty()){
+        node = Q.front();
+        Q.pop();
+        if (node->level < n - 1){
+            Node* node1 = newNode(node->weight + weightList[node->level + 1],node->profit + profit[node->level + 1], node->level + 1);
+            Node* node2 = newNode(node->weight, node->profit, node->level + 1);
+            int bound1 = bound(node1, weight, profit, weightList, n);
+            int bound2 = bound(node2, weight, profit, weightList, n);
+
+            if (bound1 > maxProfit)
+                maxProfit = node1->profit;
+
+            if (bound1 >= maxProfit) Q.push(node1);
+            if (bound2 >= maxProfit) Q.push(node2);
         }
     }
+    return maxProfit;
+}
+
+int main()
+{
+    int weightList[] = {10, 20, 30};    //weights of the items
+    int profit[] = {60, 100, 120};      //profits of the items
+    int W = 50;                          //total weight of the knapsack
+    int n = 3;                           //total number of items
+
+    cout << knapSack(W, profit, weightList, n);
 
     return 0;
-}
+} 

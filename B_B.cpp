@@ -94,28 +94,27 @@ void _print(T t, V... v)
 
 inline void solve()
 {
-    int n;
-    cin >> n;
-    unordered_map<int, int> freq;
+    int n, k;
+    cin >> n >> k;
+    string s;
+    cin >> s;
+    map<int, int> mp;
     for (int i = 0; i < n; i++)
     {
-        int x;
-        cin >> x;
-        freq[x]++;
+        mp[s[i]]++;
     }
-    int mxFreq = 0;
-    for (auto &i : freq)
+    int mn = LLONG_MAX;
+    for (int i = 0; i < k; i++)
     {
-        mxFreq = max(mxFreq, i.second);
+        mn = min(mn, mp['A' + i]);
     }
-    cout << n - mxFreq << endl;
+    cout << mn * k << endl;
 }
 
 auto main() -> int32_t
 {
     IOS;
-    int t, cs = 1;
-    cin >> t;
+    int t = 1, cs = 1;
     while (t--)
     {
         solve();
