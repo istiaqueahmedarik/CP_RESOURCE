@@ -92,23 +92,43 @@ void _print(T t, V... v)
 // template <typename T>
 // using o_multiset_g = tree<T, null_type, greater_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-void solve()
+bool isPossible(string s1, string s2)
 {
-    int N;
-    cin >> N;
-    for (int h = 1; h <= 3505; h++)
+    return (s2 + s2).find(s1) != string::npos;
+}
+
+inline void solve()
+{
+    int n;
+    cin >> n;
+    vector<string> v(n);
+    for (auto &i : v)
+        cin >> i;
+    int ans = LLONG_MAX;
+    for (int i = 0; i < n; i++)
     {
-        for (int n = 1; n <= 3505; n++)
+        int totMov = 0;
+        for (int j = 0; j < n; j++)
         {
-            int a = 4 * h * n - N * n - N * h;
-            int b = N * h * n;
-            if (a > 0 && b % a == 0)
+            if (i == j)
+                continue;
+            if (isPossible(v[i], v[j]))
             {
-                cout << h << " " << n << " " << b / a << endl;
+                int idx = (v[j] + v[j]).find(v[i]);
+                totMov += idx;
+            }
+            else
+            {
+                cout << -1 << endl;
                 return;
             }
         }
+        ans = min(ans, totMov);
     }
+    if (ans == LLONG_MAX)
+        cout << -1 << endl;
+    else
+        cout << ans << endl;
 }
 
 auto main() -> int32_t

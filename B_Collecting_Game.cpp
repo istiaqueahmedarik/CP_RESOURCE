@@ -91,54 +91,54 @@ void _print(T t, V... v)
 // using o_multiset = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
 // template <typename T>
 // using o_multiset_g = tree<T, null_type, greater_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
+#include <omp.h>
 
 inline void solve()
 {
     int n;
     cin >> n;
     vector<int> a(n);
-    vector<pair<int, int>> b;
-    for (int i = 0; i < n; i++)
+    vector<int> b;
+    for (int &i : a)
     {
-        cin >> a[i];
-        b.push_back({a[i], i});
+        cin >> i;
+        b.push_back(i);
     }
     sort(all(b));
-    vector<pair<int, int>> prefB(n);
-    prefB[0] = b[0];
-    for (int i = 1; i < n; i++)
-    {
-        prefB[i].first = prefB[i - 1].first + b[i].first;
-        prefB[i].second = b[i].second;
-    }
 
+    vector<int> ans;
+#pragma omp parallel for
     for (int i = 0; i < n; i++)
     {
-        int low = 0, high = n - 1;
-        int ans = 0;
-        while (low <= high)
+        int tmp = 0;
+        int cur = a[i];
+        bool flag = false;
+#pragma omp parallel for
+        for (int j = 0; j < n; j++)
         {
-            debug(low, high);
-            int mid = low + (high - low) / 2;
-            if (prefB[mid].second == i)
-                low = mid + 1;
-            if (mid < i && a[i] + prefB[mid].first - b[mid].first >= b[mid].first)
+            if (b[j] == a[i] && !flag)
             {
-                ans = mid;
-                low = mid + 1;
+                flag = true;
+                continue;
             }
-            else if (prefB[mid].first - b[mid].first >= b[mid].first)
+            if (cur >= b[j])
             {
-                ans = mid;
-                low = mid + 1;
+                tmp++;
+                cur += b[j];
             }
             else
             {
-                high = mid - 1;
+                break;
             }
         }
-        cout << ans << endl;
+#pragma omp critical
+        {
+            ans.push_back(tmp);
+        }
     }
+    for (int i : ans)
+        cout << i << " ";
+    cout << endl;
 }
 
 auto main() -> int32_t

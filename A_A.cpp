@@ -94,10 +94,9 @@ void _print(T t, V... v)
 
 inline void solve()
 {
-    int x, y;
-    cin >> x >> y;
-    int avg = (x + y + 1) / 2;
-    cout << max(abs(x - avg), abs(y - avg)) << endl;
+    int a, b;
+    cin >> a >> b;
+    cout << a - b << endl;
 }
 
 auto main() -> int32_t

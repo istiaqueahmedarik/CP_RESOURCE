@@ -94,19 +94,37 @@ void _print(T t, V... v)
 
 inline void solve()
 {
-    string s;
-    cin >> s;
-    map<char, int> mp;
-    for (auto &i : s)
-        mp[i]++;
-    int ans = LLONG_MAX;
-    string t = "Bulbasr";
-    for (auto &i : t)
+    int red, green, blue;
+    cin >> red >> green >> blue;
+    vector<int> v(3);
+    v = {red, green, blue};
+    int ans = 0;
+    for (auto &i : v)
     {
-        if (i == 'a' || i == 'u')
-            ans = min(ans, mp[i] / 2);
-        else
-            ans = min(ans, mp[i]);
+        if (i > 0)
+        {
+            ans++;
+            i--;
+        }
+    }
+    sort(rall(v));
+    if (v[0] > 0 && v[1] > 0)
+    {
+        ans++;
+        v[0]--;
+        v[1]--;
+    }
+    if (v[0] > 0 && v[2] > 0)
+    {
+        ans++;
+        v[0]--;
+        v[2]--;
+    }
+    if (v[1] > 0 && v[2] > 0)
+    {
+        ans++;
+        v[1]--;
+        v[2]--;
     }
     cout << ans << endl;
 }
@@ -114,7 +132,8 @@ inline void solve()
 auto main() -> int32_t
 {
     IOS;
-    int t = 1, cs = 1;
+    int t, cs = 1;
+    cin >> t;
     while (t--)
     {
         solve();

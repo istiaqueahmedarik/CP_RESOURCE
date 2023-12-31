@@ -92,33 +92,57 @@ void _print(T t, V... v)
 // template <typename T>
 // using o_multiset_g = tree<T, null_type, greater_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
+map<deque<int>, int> dp;
+
+int mxAns(deque<int> &arr, int curSum, int remain, vector<int> &curr)
+{
+    if (remain == 0)
+        return curSum;
+    if (dp.count(arr))
+        return dp[arr];
+    // take from left
+    curr.push_back(arr.front());
+    arr.pop_front();
+    int ans = mxAns(arr, curSum + curr.back(), remain - 1, curr);
+    curr.pop_back();
+    // take from right
+    curr.push_back(arr.back());
+    arr.pop_back();
+    ans = max(ans, mxAns(arr, curSum + curr.back(), remain - 1, curr));
+    curr.pop_back();
+    // put in left;
+    sort(rall(curr));
+    int x = curr.back();
+    curr.pop_back();
+    arr.push_front(x);
+    ans = max(ans, mxAns(arr, curSum - x, remain - 1, curr));
+    curr.push_back(x);
+    // put in right
+    x = curr.back();
+    curr.pop_back();
+    arr.push_back(x);
+    ans = max(ans, mxAns(arr, curSum - x, remain - 1, curr));
+    curr.push_back(x);
+}
+
 inline void solve()
 {
-    int n;
-    cin >> n;
+    int n, k;
+    cin >> n >> k;
     vector<int> a(n);
     for (auto &i : a)
         cin >> i;
-    vector<int> odds, evens;
-    for (int i = 0; i < n; i++)
-    {
-        if (a[i] & 1)
-            odds.push_back(a[i]);
-        else
-            evens.push_back(a[i]);
-    }
-    for (auto &i : evens)
-        cout << i << " ";
-    for (auto &i : odds)
-        cout << i << " ";
-    cout << endl;
+    deque<int> arr;
+    for (auto &i : a)
+        arr.push_back(i);
+    vector<int> curr;
+    cout << mxAns(arr, 0, k, curr) << endl;
 }
 
 auto main() -> int32_t
 {
     IOS;
-    int t, cs = 1;
-    cin >> t;
+    int t = 1, cs = 1;
     while (t--)
     {
         solve();

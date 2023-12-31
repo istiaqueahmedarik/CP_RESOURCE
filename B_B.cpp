@@ -94,21 +94,11 @@ void _print(T t, V... v)
 
 inline void solve()
 {
-    int n, k;
-    cin >> n >> k;
-    string s;
-    cin >> s;
-    map<int, int> mp;
-    for (int i = 0; i < n; i++)
-    {
-        mp[s[i]]++;
-    }
-    int mn = LLONG_MAX;
-    for (int i = 0; i < k; i++)
-    {
-        mn = min(mn, mp['A' + i]);
-    }
-    cout << mn * k << endl;
+    int x, y;
+    cin >> x >> y;
+    int a = (x + y) / 2;
+    int b = x - a;
+    cout << a << " " << b << endl;
 }
 
 auto main() -> int32_t
