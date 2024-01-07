@@ -94,39 +94,16 @@ void _print(T t, V... v)
 
 inline void solve()
 {
-    int red, green, blue;
-    cin >> red >> green >> blue;
-    vector<int> v(3);
-    v = {red, green, blue};
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (auto &i : a)
+        cin >> i;
     int ans = 0;
-    for (auto &i : v)
-    {
-        if (i > 0)
-        {
-            ans++;
-            i--;
-        }
-    }
-    sort(rall(v));
-    if (v[0] > 0 && v[1] > 0)
-    {
-        ans++;
-        v[0]--;
-        v[1]--;
-    }
-    if (v[0] > 0 && v[2] > 0)
-    {
-        ans++;
-        v[0]--;
-        v[2]--;
-    }
-    if (v[1] > 0 && v[2] > 0)
-    {
-        ans++;
-        v[1]--;
-        v[2]--;
-    }
-    cout << ans << endl;
+    for (auto i : a)
+        ans += i & 1;
+    ans -= ans & 1;
+    cout << ans / 2 << endl;
 }
 
 auto main() -> int32_t

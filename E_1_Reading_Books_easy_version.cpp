@@ -92,43 +92,84 @@ void _print(T t, V... v)
 // template <typename T>
 // using o_multiset_g = tree<T, null_type, greater_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
+struct book
+{
+    int time, alex, bob;
+    book(int t, int a, int b)
+    {
+        time = t;
+        alex = a;
+        bob = b;
+    }
+};
+
 inline void solve()
 {
     int n, k;
     cin >> n >> k;
-    string s;
-    cin >> s;
-    // count conseq * in s
-    int cnt = 0;
+    vector<book> v, v1, v2;
     for (int i = 0; i < n; i++)
     {
-        if (s[i] == '*')
+        int t, a, b;
+        cin >> t >> a >> b;
+        if (a == 0 && b == 0)
+            continue;
+        if (a == 1 && b == 1)
+            v.push_back(book(t, a, b));
+        else if (a == 1 && b == 0)
+            v1.push_back(book(t, a, b));
+        else if (a == 0 && b == 1)
+            v2.push_back(book(t, a, b));
+    }
+    sort(rall(v), [](book a, book b)
+         { return a.time < b.time; });
+    sort(rall(v1), [](book a, book b)
+         { return a.time < b.time; });
+    sort(rall(v2), [](book a, book b)
+         { return a.time < b.time; });
+    if (min(v1.size(), v2.size()) + v.size() < k)
+    {
+        cout << -1 << endl;
+        return;
+    }
+    int ans = 0;
+    while (k)
+    {
+        if (v1.empty() || v2.empty())
         {
-            cnt++;
-            if (cnt >= k)
-            {
-                cout << "YES" << endl;
-                return;
-            }
+            ans += v.back().time;
+            v.pop_back();
+            k--;
+            continue;
+        }
+        if (v.empty())
+        {
+            ans += v1.back().time + v2.back().time;
+            v1.pop_back();
+            v2.pop_back();
+            k--;
+            continue;
+        }
+        if (v1.back().time + v2.back().time < v.back().time)
+        {
+            ans += v1.back().time + v2.back().time;
+            v1.pop_back();
+            v2.pop_back();
         }
         else
         {
-            cnt = 0;
+            ans += v.back().time;
+            v.pop_back();
         }
+        k--;
     }
-    if (cnt >= k)
-    {
-        cout << "YES" << endl;
-        return;
-    }
-    cout << "NO" << endl;
+    cout << ans << endl;
 }
 
 auto main() -> int32_t
 {
     IOS;
-    int t, cs = 1;
-    cin >> t;
+    int t = 1, cs = 1;
     while (t--)
     {
         solve();

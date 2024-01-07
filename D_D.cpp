@@ -92,43 +92,30 @@ void _print(T t, V... v)
 // template <typename T>
 // using o_multiset_g = tree<T, null_type, greater_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-bool isPossible(string s1, string s2)
-{
-    return (s2 + s2).find(s1) != string::npos;
-}
-
 inline void solve()
 {
-    int n;
-    cin >> n;
-    vector<string> v(n);
-    for (auto &i : v)
-        cin >> i;
-    int ans = LLONG_MAX;
-    for (int i = 0; i < n; i++)
+    int n, m;
+    cin >> n >> m;
+    char c[n + 1][m + 1];
+    for (int i = 1; i <= n; i++)
     {
-        int totMov = 0;
-        for (int j = 0; j < n; j++)
+        for (int j = 1; j <= m; j++)
         {
-            if (i == j)
-                continue;
-            if (isPossible(v[i], v[j]))
+            cin >> c[i][j];
+        }
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= m; j++)
+        {
+            if (c[i][j] == '#' && c[i - 1][j] == '.' && c[i][j - 1] == '.' && c[i + 1][j] == '.' && c[i][j + 1] == '.')
             {
-                int idx = (v[j] + v[j]).find(v[i]);
-                totMov += idx;
-            }
-            else
-            {
-                cout << -1 << endl;
+                cout << "No" << endl;
                 return;
             }
         }
-        ans = min(ans, totMov);
     }
-    if (ans == LLONG_MAX)
-        cout << -1 << endl;
-    else
-        cout << ans << endl;
+    cout << "Yes" << endl;
 }
 
 auto main() -> int32_t

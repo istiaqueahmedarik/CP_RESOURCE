@@ -96,32 +96,6 @@ inline void solve()
 {
     int n, k;
     cin >> n >> k;
-    string s;
-    cin >> s;
-    // count conseq * in s
-    int cnt = 0;
-    for (int i = 0; i < n; i++)
-    {
-        if (s[i] == '*')
-        {
-            cnt++;
-            if (cnt >= k)
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-        else
-        {
-            cnt = 0;
-        }
-    }
-    if (cnt >= k)
-    {
-        cout << "YES" << endl;
-        return;
-    }
-    cout << "NO" << endl;
 }
 
 auto main() -> int32_t

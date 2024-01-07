@@ -94,34 +94,29 @@ void _print(T t, V... v)
 
 inline void solve()
 {
-    int n, k;
-    cin >> n >> k;
+    int n;
+    cin >> n;
     string s;
     cin >> s;
-    // count conseq * in s
-    int cnt = 0;
+    int ans = 0;
     for (int i = 0; i < n; i++)
     {
-        if (s[i] == '*')
+        unordered_map<char, int> mp;
+        int mx = 0;
+        int distinct = 0;
+        for (int j = i; j < n; j++)
         {
-            cnt++;
-            if (cnt >= k)
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-        else
-        {
-            cnt = 0;
+            mp[s[j]]++;
+            if (mp[s[j]] > 10)
+                break;
+            mx = max(mx, mp[s[j]]);
+            if (mp[s[j]] == 1)
+                distinct++;
+            if (distinct >= mx)
+                ans++;
         }
     }
-    if (cnt >= k)
-    {
-        cout << "YES" << endl;
-        return;
-    }
-    cout << "NO" << endl;
+    cout << ans << endl;
 }
 
 auto main() -> int32_t

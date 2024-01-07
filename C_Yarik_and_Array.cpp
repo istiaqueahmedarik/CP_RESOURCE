@@ -94,34 +94,26 @@ void _print(T t, V... v)
 
 inline void solve()
 {
-    int n, k;
-    cin >> n >> k;
-    string s;
-    cin >> s;
-    // count conseq * in s
-    int cnt = 0;
-    for (int i = 0; i < n; i++)
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    for (auto &i : v)
+        cin >> i;
+    int curSum = v[0];
+    int ans = v[0];
+    for (int i = 1; i < n; i++)
     {
-        if (s[i] == '*')
+        if ((abs(v[i]) & 1) == (abs(v[i - 1]) & 1))
         {
-            cnt++;
-            if (cnt >= k)
-            {
-                cout << "YES" << endl;
-                return;
-            }
+            curSum = v[i];
         }
         else
         {
-            cnt = 0;
+            curSum = max(v[i], curSum + v[i]);
         }
+        ans = max(ans, curSum);
     }
-    if (cnt >= k)
-    {
-        cout << "YES" << endl;
-        return;
-    }
-    cout << "NO" << endl;
+    cout << ans << endl;
 }
 
 auto main() -> int32_t

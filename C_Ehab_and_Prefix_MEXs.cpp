@@ -94,41 +94,36 @@ void _print(T t, V... v)
 
 inline void solve()
 {
-    int n, k;
-    cin >> n >> k;
-    string s;
-    cin >> s;
-    // count conseq * in s
-    int cnt = 0;
-    for (int i = 0; i < n; i++)
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (auto &i : a)
+        cin >> i;
+    vector<int> ans(n, -1);
+    int mx = *max_element(all(a));
+    for (int i = n - 1; i >= 0; i--)
     {
-        if (s[i] == '*')
+        mx = a[i];
+        if (mx == 0)
         {
-            cnt++;
-            if (cnt >= k)
-            {
-                cout << "YES" << endl;
-                return;
-            }
+            ans[i] = 1;
+            continue;
         }
-        else
+        ans[i] = mx - 1;
+        ans[i] = max(ans[i], 0LL);
+        for (int j = i - 1; j >= 0; j--)
         {
-            cnt = 0;
+            ans[j] = max(ans[j + 1] - 1, 0LL);
         }
     }
-    if (cnt >= k)
-    {
-        cout << "YES" << endl;
-        return;
-    }
-    cout << "NO" << endl;
+    for (auto &i : ans)
+        cout << i << " ";
 }
 
 auto main() -> int32_t
 {
     IOS;
-    int t, cs = 1;
-    cin >> t;
+    int t = 1, cs = 1;
     while (t--)
     {
         solve();

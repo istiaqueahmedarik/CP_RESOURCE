@@ -94,34 +94,22 @@ void _print(T t, V... v)
 
 inline void solve()
 {
-    int n, k;
-    cin >> n >> k;
+    int n;
+    cin >> n;
+    unordered_map<int, int> mp;
     string s;
     cin >> s;
-    // count conseq * in s
-    int cnt = 0;
-    for (int i = 0; i < n; i++)
+    for (auto i : s)
     {
-        if (s[i] == '*')
-        {
-            cnt++;
-            if (cnt >= k)
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-        else
-        {
-            cnt = 0;
-        }
+        mp[i - 'A' + 1]++;
     }
-    if (cnt >= k)
+    int ans = 0;
+    for (int i = 1; i <= 26; i++)
     {
-        cout << "YES" << endl;
-        return;
+        if (mp[i] >= i)
+            ans++;
     }
-    cout << "NO" << endl;
+    cout << ans << endl;
 }
 
 auto main() -> int32_t

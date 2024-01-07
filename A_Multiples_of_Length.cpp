@@ -94,41 +94,43 @@ void _print(T t, V... v)
 
 inline void solve()
 {
-    int n, k;
-    cin >> n >> k;
-    string s;
-    cin >> s;
-    // count conseq * in s
-    int cnt = 0;
-    for (int i = 0; i < n; i++)
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    for (auto &i : v)
+        cin >> i;
+    if (n == 1)
     {
-        if (s[i] == '*')
-        {
-            cnt++;
-            if (cnt >= k)
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-        else
-        {
-            cnt = 0;
-        }
-    }
-    if (cnt >= k)
-    {
-        cout << "YES" << endl;
+        cout << 1 << " " << 1 << endl;
+        cout << -v[0] << endl;
+        cout << 1 << " " << 1 << endl;
+        cout << 0 << endl;
+        cout << 1 << " " << 1 << endl;
+        cout << 0 << endl;
         return;
     }
-    cout << "NO" << endl;
+
+    cout << 1 << " " << n << endl;
+    for (int i = 0; i < n - 1; i++)
+    {
+        cout << -v[i] * n << " ";
+    }
+    cout << 0 << " ";
+    cout << endl;
+    cout << 1 << " " << n - 1 << endl;
+    for (int i = 0; i < n - 1; i++)
+    {
+        cout << v[i] * (n - 1) << " ";
+    }
+    cout << endl;
+    cout << n << " " << n << endl;
+    cout << -v[n - 1] << endl;
 }
 
 auto main() -> int32_t
 {
     IOS;
-    int t, cs = 1;
-    cin >> t;
+    int t = 1, cs = 1;
     while (t--)
     {
         solve();

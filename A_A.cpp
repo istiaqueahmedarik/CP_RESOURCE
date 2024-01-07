@@ -94,9 +94,9 @@ void _print(T t, V... v)
 
 inline void solve()
 {
-    int a, b;
-    cin >> a >> b;
-    cout << a - b << endl;
+    int x;
+    cin >> x;
+    cout << (x % 10) << endl;
 }
 
 auto main() -> int32_t
